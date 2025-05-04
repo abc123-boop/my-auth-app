@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useAuth } from './AuthContext';
 import { toast } from 'sonner';
+import.meta.env.VITE_API_URL
 
 const ExpenseContext = createContext();
 
@@ -19,7 +20,7 @@ export function ExpenseProvider({ children }) {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/expenses', {
+      const response = await fetch(`${VITE_API_URL}/api/expenses`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -46,7 +47,7 @@ export function ExpenseProvider({ children }) {
   const addExpense = async (expenseData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/expenses', {
+      const response = await fetch(`${VITE_API_URL}/api/expenses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +74,7 @@ export function ExpenseProvider({ children }) {
   const deleteExpense = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/expenses/${id}`, {
+      const response = await fetch(`${VITE_API_URL}/api/expenses/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
