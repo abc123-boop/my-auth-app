@@ -1,7 +1,8 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-import.meta.env.VITE_API_URL
+
+const API_URL=import.meta.env.VITE_API_URL
 
 
 const AuthContext = createContext();
@@ -22,7 +23,7 @@ export function AuthProvider({ children }) {
         }
 
         // Verify token with backend
-        const response = await fetch(`${VITE_API_URL}/api/auth/verify`, {
+        const response = await fetch(`${API_URL}/api/auth/verify`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch(`${VITE_API_URL}/api/auth/login`, {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +98,7 @@ export function AuthProvider({ children }) {
 
   const register = async (name, email, password) => {
     try {
-      const response = await fetch(`${VITE_API_URL}/api/auth/register`, {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
